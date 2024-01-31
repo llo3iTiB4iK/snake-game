@@ -20,8 +20,7 @@ screen.onkey(snake.down, "Down")
 screen.onkey(snake.left, "Left")
 screen.onkey(snake.right, "Right")
 
-game_is_on = True
-while game_is_on:
+while True:
     screen.update()
     time.sleep(0.1)
 
@@ -33,12 +32,14 @@ while game_is_on:
         snake.extend()
 
     if not (-285 < snake.head.xcor() < 285 and -285 < snake.head.ycor() < 285):
-        game_is_on = False
-        scoreboard.game_over()
+        scoreboard.reset()
+        snake.reset()
+        time.sleep(1)
 
     for segment in snake.segments[1:]:
         if snake.head.distance(segment) < 10:
-            game_is_on = False
-            scoreboard.game_over()
+            scoreboard.reset()
+            snake.reset()
+            time.sleep(1)
 
 screen.exitonclick()
